@@ -1,12 +1,12 @@
 <?php
-    class Database{
+    class Connection{
         public static function connectionMysql(){
-            $host = "";
-            $username = "";
+            $host = "localhost";
+            $username = "root";
             $password = "";
-            $databasename= "";
+            $databasename= "hotel";
             $connection = new mysqli($host,$username,$password,$databasename);
-            return $connection();
+            return $connection;
         }
     }
 

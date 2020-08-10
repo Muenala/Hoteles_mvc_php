@@ -42,7 +42,7 @@
         }
 
         public function eliminar($ID_SUC){
-            $resultado = $this->db->query("DELETE sucursal WHERE ID_SUC = '$ID_SUC'");
-            
+            $resultado = $this->db->query("DELETE FROM sucursal WHERE ID_SUC = '$ID_SUC'");
+            printf("Errormessage: %s\n", $this->db->error);
         }
     }

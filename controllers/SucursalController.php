@@ -1,6 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['rol'])){
 
     class SucursalController{
+        
         public function __construct()
         {
             require_once "models/SucursalModel.php";
@@ -11,7 +14,6 @@
             $sucursales = new SucursalModel();
             $data["titulo"] = "Sucursales";
             $data["sucursales"] = $sucursales->getSucursales();
-
             require_once "views/Sucursal/Sucursal.php";
         }
 
@@ -29,7 +31,6 @@
             $IMAGEN_SUC = $_POST['IMAGEN_SUC'];
             $sucursales = new SucursalModel();
             $sucursales->insertar($NOMBRE_SUC,$DIRECCION_SUC,$TELEFONO_SUC,$UBICACIONLAT_SUC,$UBICACIONLON_SUC,$IMAGEN_SUC);
-            $data["titulo"] = "Sucursales";
             $this->index();
         }
 
@@ -51,20 +52,19 @@
             $UBICACIONLON_SUC = $_POST['UBICACIONLON_SUC'];
             $IMAGEN_SUC = $_POST['IMAGEN_SUC'];
             $sucursales = new SucursalModel();
-            $resultado =  $sucursales->modificar($ID_SUC,$NOMBRE_SUC,$DIRECCION_SUC,$TELEFONO_SUC,$UBICACIONLAT_SUC,$UBICACIONLON_SUC,$IMAGEN_SUC);
-            if($resultado ){
-                $data["titulo"] = "Sucursales";
-                $this->index();
-            }else{
-                echo 'error';
-                
-            }
+            $sucursales->modificar($ID_SUC,$NOMBRE_SUC,$DIRECCION_SUC,$TELEFONO_SUC,$UBICACIONLAT_SUC,$UBICACIONLON_SUC,$IMAGEN_SUC);
+            $this->index();
+        }
 
+        public function eliminar($ID_SUC){
+            $sucursales = new SucursalModel();
+            $sucursales->eliminar($ID_SUC);
+            $this->index();
         }
 
 
 
     }
 
-
+}
 
